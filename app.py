@@ -12,14 +12,23 @@ from htmlTemplates import css, bot_template, user_template
 from langchain.llms import HuggingFaceHub
 
 
+import streamlit as st
+import os
+
 # Access secrets via st.secrets
 openai_api_key = st.secrets["openai_api_key"]
 huggingfacehub_api_token = st.secrets["huggingfacehub_api_token"]
 
+# Print the secrets
+st.write("OpenAI API key:", openai_api_key)
+st.write("Hugging Face Hub API token:", huggingfacehub_api_token)
 
-# Now you can use the API keys in your code
-st.write("OpenAI API Key:", openai_api_key)
-st.write("HuggingFaceHub API Token:", huggingfacehub_api_token)
+# Check if environment variables have been set correctly
+st.write(
+    "Has environment variable been set:",
+    os.environ["OPENAI_API_KEY"] == openai_api_key,
+    os.environ["HUGGINGFACEHUB_API_TOKEN"] == huggingfacehub_api_token,
+)
 
 def get_pdf_text(pdf_docs):
     text = ""
