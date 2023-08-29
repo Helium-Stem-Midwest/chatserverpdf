@@ -11,7 +11,14 @@ from htmlTemplates import css, bot_template, user_template
 
 from langchain.llms import HuggingFaceHub
 
+# export OPENAI_API_KEY=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
+# export HUGGINGFACEHUB_API_TOKEN=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
+# streamlit run app.py
 
+# openai_api_key = "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"
+# huggingfacehub_api_token = "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"
+
+# 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
 import streamlit as st
 import os
 
@@ -19,16 +26,16 @@ import os
 openai_api_key = st.secrets["openai_api_key"]
 huggingfacehub_api_token = st.secrets["huggingfacehub_api_token"]
 
-# Print the secrets
-st.write("OpenAI API key:", openai_api_key)
-st.write("Hugging Face Hub API token:", huggingfacehub_api_token)
+# # Print the secrets
+# st.write("OpenAI API key:", openai_api_key)
+# st.write("Hugging Face Hub API token:", huggingfacehub_api_token)
 
-# Check if environment variables have been set correctly
-st.write(
-    "Has environment variable been set:",
-    os.environ["OPENAI_API_KEY"] == openai_api_key,
-    os.environ["HUGGINGFACEHUB_API_TOKEN"] == huggingfacehub_api_token,
-)
+# # Check if environment variables have been set correctly
+# st.write(
+#     "Has environment variable been set:",
+#     os.environ["OPENAI_API_KEY"] == openai_api_key,
+#     os.environ["HUGGINGFACEHUB_API_TOKEN"] == huggingfacehub_api_token,
+# )
 
 def get_pdf_text(pdf_docs):
     text = ""
@@ -89,6 +96,7 @@ def main():
     st.set_page_config(page_title="Chat with multiple PDFs",
                        page_icon=":books:")
     st.write(css, unsafe_allow_html=True)
+    print("OpenAI API Key:", os.environ.get("OPENAI_API_KEY"))
 
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -104,6 +112,7 @@ def main():
         st.subheader("Your documents")
         pdf_docs = st.file_uploader(
             "Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
+        
         if st.button("Process"):
             with st.spinner("Processing"):
                 # get pdf text
