@@ -13,8 +13,9 @@ from langchain.llms import HuggingFaceHub
 
 
 # Access secrets via st.secrets
-openai_api_key = st.secrets["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"]
-huggingfacehub_api_token = st.secrets["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"]
+openai_api_key = st.secrets["openai_api_key"]
+huggingfacehub_api_token = st.secrets["huggingfacehub_api_token"]
+
 
 # Now you can use the API keys in your code
 st.write("OpenAI API Key:", openai_api_key)
